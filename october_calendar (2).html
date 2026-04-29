@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>🗾 여행 캘린더</title>
+
+<!-- PWA / iOS 홈 화면 앱 설정 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="여행 캘린더">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#e4e4e4">
+
+<!-- 앱 아이콘 (SVG 인라인으로 생성) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNjgwIDY4MCI+CjxkZWZzPgogIDxjbGlwUGF0aCBpZD0iaWMiPgogICAgPHJlY3QgeD0iOTAiIHk9IjAiIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTEyIi8+CiAgPC9jbGlwUGF0aD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxYTFhMmUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBmMzQ2MCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJib2R5IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYjBiMGIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEyJSIgc3RvcC1jb2xvcj0iI2Q0ZDRkNCIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNlY2VjZWMiLz4KICAgIDxzdG9wIG9mZnNldD0iODglIiBzdG9wLWNvbG9yPSIjZDBkMGQwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhYWFhYWEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxsaW5lYXJHcmFkaWVudCBpZD0iZnJhbWUiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNjMGMwYzAiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzgwODA4MCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJoYW5kbGUiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNhYWEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzY2NiIvPgogIDwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPGcgY2xpcC1wYXRoPSJ1cmwoI2ljKSI+CiAgPHJlY3QgeD0iOTAiIHk9IjAiIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxjaXJjbGUgY3g9IjE0OCIgY3k9IjU4IiByPSIxLjgiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4zNSkiLz4KICA8Y2lyY2xlIGN4PSI1MzUiIGN5PSI0MiIgcj0iMS40IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMjUpIi8+CiAgPGNpcmNsZSBjeD0iNDkyIiBjeT0iODgiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC40NSkiLz4KICA8Y2lyY2xlIGN4PSIxODgiIGN5PSI5OCIgcj0iMS40IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KICA8Y2lyY2xlIGN4PSI1NTgiIGN5PSIxMjUiIHI9IjEuOCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjMpIi8+CiAgPGNpcmNsZSBjeD0iNDIwIiBjeT0iMTYwIiByPSIxLjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPgogIDxjaXJjbGUgY3g9IjE2MCIgY3k9IjIwMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjI1KSIvPgogIDx0ZXh0IHg9IjM0MCIgeT0iMTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iJ05vdG8gU2FucyBKUCcsJ0hpcmFnaW5vIFNhbnMnLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSI2IiBmaWxsPSIjZmZmZmZmIj7jg5Djgqvjg7Pjgrk8L3RleHQ+CiAgPGxpbmUgeDE9IjE3MCIgeTE9IjE4NiIgeDI9IjUxMCIgeTI9IjE4NiIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8cmVjdCB4PSIxNzAiIHk9IjI3MCIgd2lkdGg9IjM0MCIgaGVpZ2h0PSI0MzAiIHJ4PSIxNCIgZmlsbD0idXJsKCNib2R5KSIvPgogIDxsaW5lIHgxPSIyMTgiIHkxPSIyNzAiIHgyPSIyMTgiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iMjE5LjYiIHkxPSIyNzAiIHgyPSIyMTkuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxsaW5lIHgxPSIyNTIiIHkxPSIyNzAiIHgyPSIyNTIiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iMjUzLjYiIHkxPSIyNzAiIHgyPSIyNTMuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxsaW5lIHgxPSIyODYiIHkxPSIyNzAiIHgyPSIyODYiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iMjg3LjYiIHkxPSIyNzAiIHgyPSIyODcuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxsaW5lIHgxPSIzMjAiIHkxPSIyNzAiIHgyPSIzMjAiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iMzIxLjYiIHkxPSIyNzAiIHgyPSIzMjEuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxsaW5lIHgxPSIzNTQiIHkxPSIyNzAiIHgyPSIzNTQiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iMzU1LjYiIHkxPSIyNzAiIHgyPSIzNTUuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxsaW5lIHgxPSIzODgiIHkxPSIyNzAiIHgyPSIzODgiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iMzg5LjYiIHkxPSIyNzAiIHgyPSIzODkuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxsaW5lIHgxPSI0MjIiIHkxPSIyNzAiIHgyPSI0MjIiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iNDIzLjYiIHkxPSIyNzAiIHgyPSI0MjMuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxsaW5lIHgxPSI0NTYiIHkxPSIyNzAiIHgyPSI0NTYiIHkyPSI3MDAiIHN0cm9rZT0iIzk5OSIgc3Ryb2tlLXdpZHRoPSIyLjQiLz4KICA8bGluZSB4MT0iNDU3LjYiIHkxPSIyNzAiIHgyPSI0NTcuNiIgeTI9IjcwMCIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2Utd2lkdGg9IjAuOSIvPgogIDxyZWN0IHg9IjE3MCIgeT0iMjcwIiB3aWR0aD0iMzQwIiBoZWlnaHQ9IjQzMCIgcng9IjE0IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZnJhbWUpIiBzdHJva2Utd2lkdGg9IjUiLz4KICA8cmVjdCB4PSIyNzIiIHk9IjI1MiIgd2lkdGg9IjEzNiIgaGVpZ2h0PSIyNCIgcng9IjciIGZpbGw9InVybCgjaGFuZGxlKSIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjEuMiIvPgogIDxyZWN0IHg9IjI4MiIgeT0iMjU4IiB3aWR0aD0iMTE2IiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iIzc3NyIvPgogIDxyZWN0IHg9IjE1OCIgeT0iMzMwIiB3aWR0aD0iMTQiIGhlaWdodD0iNTYiIHJ4PSI3IiBmaWxsPSJ1cmwoI2hhbmRsZSkiIHN0cm9rZT0iIzg4OCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHJlY3QgeD0iNTA4IiB5PSIzMzAiIHdpZHRoPSIxNCIgaGVpZ2h0PSI1NiIgcng9IjciIGZpbGw9InVybCgjaGFuZGxlKSIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjEiLz4KICA8cmVjdCB4PSIzMDYiIHk9IjM4MCIgd2lkdGg9IjY4IiBoZWlnaHQ9IjQ2IiByeD0iOCIgZmlsbD0iIzg4OCIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxyZWN0IHg9IjMxMyIgeT0iMzg3IiB3aWR0aD0iNTQiIGhlaWdodD0iMzIiIHJ4PSI1IiBmaWxsPSIjNjY2Ii8+CiAgPGNpcmNsZSBjeD0iMzI4IiBjeT0iNDAzIiByPSI5IiBmaWxsPSIjNTU1IiBzdHJva2U9IiM0NDQiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iNDAzIiByPSI5IiBmaWxsPSIjNTU1IiBzdHJva2U9IiM0NDQiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPGNpcmNsZSBjeD0iMzUyIiBjeT0iNDAzIiByPSI5IiBmaWxsPSIjNTU1IiBzdHJva2U9IiM0NDQiIHN0cm9rZS13aWR0aD0iMS4yIi8+CiAgPHRleHQgeD0iMzI4IiB5PSI0MDciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNiYmIiIGZvbnQtd2VpZ2h0PSI3MDAiPjA8L3RleHQ+CiAgPHRleHQgeD0iMzQwIiB5PSI0MDciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNiYmIiIGZvbnQtd2VpZ2h0PSI3MDAiPjA8L3RleHQ+CiAgPHRleHQgeD0iMzUyIiB5PSI0MDciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNiYmIiIGZvbnQtd2VpZ2h0PSI3MDAiPjA8L3RleHQ+CjwvZz4KPHJlY3QgeD0iOTAiIHk9IjAiIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiByeD0iMTEyIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --safe-top:env(safe-area-inset-top,16px);
+  --safe-bottom:env(safe-area-inset-bottom,16px);
+  --red:#e07060;--blue:#6090c0;--green:#5a9e6f;
+  --ink:#111;--sub:#999;--card:#f7f7f7;--border:#ebebeb;
+}
+body{background:#e4e4e4;font-family:'Inter','Noto Sans JP',-apple-system,sans-serif;min-height:100dvh;padding-bottom:var(--safe-bottom);}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:calc(var(--safe-top) + 44px);background:rgba(255,255,255,0.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #e8e8e8;z-index:50;display:flex;align-items:flex-end;padding:0 16px 10px;transition:opacity 0.2s;}
+.topbar.hidden{opacity:0;pointer-events:none;}
+.topbar-menu-btn{background:none;border:none;cursor:pointer;font-size:1.3rem;line-height:1;padding:0;color:var(--ink);}
+.topbar-title{font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:-0.02em;flex:1;text-align:center;}
+.topbar-right{width:28px;}
+
+/* SIDEBAR */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.sidebar-overlay.active{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:72vw;max-width:280px;background:#fff;z-index:201;transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;padding-top:var(--safe-top);}
+.sidebar.active{transform:translateX(0);}
+.sidebar-head{padding:20px 20px 16px;border-bottom:1px solid #f2f2f2;}
+.sidebar-app-name{font-size:1.2rem;font-weight:700;letter-spacing:-0.03em;color:var(--ink);}
+.sidebar-trip-name{font-size:0.72rem;color:var(--sub);margin-top:3px;}
+.sidebar-menu{flex:1;padding:12px 0;overflow-y:auto;}
+.sidebar-item{display:flex;align-items:center;gap:12px;padding:13px 20px;cursor:pointer;transition:background 0.12s;border:none;background:none;width:100%;font-family:inherit;text-align:left;}
+.sidebar-item:active{background:#f5f5f5;}
+.sidebar-item.active{background:#f0f0f0;}
+.sidebar-item-icon{font-size:1.1rem;width:24px;text-align:center;flex-shrink:0;}
+.sidebar-item-label{font-size:0.88rem;font-weight:400;color:var(--ink);}
+.sidebar-item.active .sidebar-item-label{font-weight:600;}
+.sidebar-divider{height:1px;background:#f2f2f2;margin:6px 20px;}
+.sidebar-footer{padding:16px 20px calc(var(--safe-bottom)+12px);border-top:1px solid #f2f2f2;}
+.sidebar-footer-label{font-size:0.6rem;color:#ccc;letter-spacing:0.05em;}
+
+.page{display:none;padding:calc(var(--safe-top) + 56px) 12px 16px;}
+.page.active{display:block;}
+.page#page-cal{padding:0;}
+
+.cal-hero{
+  padding:calc(var(--safe-top) + 52px) 20px 20px;
+  position:relative;
+  transition:background 0.5s ease;
+}
+.cal-hero.m1 {background:linear-gradient(135deg,#0d47a1,#1565c0);}
+.cal-hero.m2 {background:linear-gradient(135deg,#6a1b9a,#7b1fa2);}
+.cal-hero.m3 {background:linear-gradient(135deg,#ad1457,#c2185b);}
+.cal-hero.m4 {background:linear-gradient(135deg,#c62828,#d32f2f);}
+.cal-hero.m5 {background:linear-gradient(135deg,#2e7d32,#388e3c);}
+.cal-hero.m6 {background:linear-gradient(135deg,#00838f,#0097a7);}
+.cal-hero.m7 {background:linear-gradient(135deg,#0277bd,#0288d1);}
+.cal-hero.m8 {background:linear-gradient(135deg,#01579b,#0277bd);}
+.cal-hero.m9 {background:linear-gradient(135deg,#f57f17,#f9a825);}
+.cal-hero.m10{background:linear-gradient(135deg,#bf360c,#d84315);}
+.cal-hero.m11{background:linear-gradient(135deg,#4e342e,#5d4037);}
+.cal-hero.m12{background:linear-gradient(135deg,#263238,#37474f);}
+
+/* 9월은 텍스트 검정 */
+.cal-hero.m9 .cal-hero-year,
+.cal-hero.m9 .cal-hero-month,
+.cal-hero.m9 .cal-hero-today-btn,
+.cal-hero.m9 .cal-hero-menu-btn,
+.cal-hero.m9 .cal-hero-nav-btn { color:#111; }
+.cal-hero.m9 .cal-hero-nav-btn,
+.cal-hero.m9 .cal-hero-today-btn,
+.cal-hero.m9 .cal-hero-menu-btn { background:rgba(0,0,0,0.1); }
+
+.cal-hero-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.cal-hero-nav-btn{background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:#fff;line-height:1;}
+.cal-hero-year{font-size:2.4rem;font-weight:700;color:#fff;letter-spacing:-0.03em;line-height:1;text-align:center;}
+.cal-hero-month{font-size:0.85rem;font-weight:400;color:rgba(255,255,255,0.7);text-align:center;margin-top:4px;letter-spacing:0.04em;}
+.cal-hero-today-btn{position:absolute;top:calc(var(--safe-top) + 10px);right:16px;background:rgba(255,255,255,0.15);border:none;border-radius:999px;padding:4px 12px;font-size:0.65rem;color:#fff;cursor:pointer;font-family:inherit;}
+.cal-hero-menu-btn{position:absolute;top:calc(var(--safe-top) + 8px);left:16px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:#fff;}
+
+.cal-body{background:#fff;border-radius:24px 24px 0 0;margin-top:-12px;padding:16px 12px 20px;}
+
+.trip-range-bar{background:#f7f7f7;border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.trip-range-label{font-size:0.6rem;color:var(--sub);}
+.trip-range-val{font-size:0.72rem;font-weight:500;color:var(--ink);}
+.trip-set-btn{font-size:0.65rem;color:var(--blue);background:none;border:none;cursor:pointer;font-family:inherit;font-weight:500;}
+
+.weekdays{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:4px;}
+.weekday{text-align:center;font-size:0.6rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#c0c0c0;padding:4px 0 8px;}
+.weekday:first-child{color:var(--red);}
+.weekday:last-child{color:var(--blue);}
+.days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.day-cell{border-radius:8px;padding:5px 3px;min-height:60px;cursor:pointer;overflow:hidden;transition:background 0.1s;position:relative;}
+.day-cell:active{background:#f0f0f0;}
+.day-cell.empty{pointer-events:none;}
+.day-cell.in-trip{background:rgba(90,158,111,0.07);}
+.day-cell.trip-start{background:rgba(90,158,111,0.14);border-top-left-radius:12px;border-bottom-left-radius:12px;}
+.day-cell.trip-end{background:rgba(90,158,111,0.14);border-top-right-radius:12px;border-bottom-right-radius:12px;}
+.day-num-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;}
+.day-num{font-size:0.8rem;font-weight:400;color:#222;line-height:1;}
+.day-total{font-size:0.46rem;color:#c0c0c0;font-family:'Inter',sans-serif;}
+.day-cell.sunday .day-num{color:var(--red);}
+.day-cell.saturday .day-num{color:var(--blue);}
+.day-cell.holiday .day-num{color:var(--red);}
+.day-cell.today .day-num{background:var(--ink);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:600;}
+.holiday-label{display:block;font-size:0.44rem;color:var(--red);opacity:0.7;margin-bottom:2px;line-height:1.2;font-family:'Noto Sans JP',sans-serif;}
+.event-chip{display:block;margin-top:2px;padding:1px 5px;border-radius:999px;background:#f0f0f0;color:#444;font-size:0.5rem;font-family:'Noto Sans JP','Inter',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1.6;}
+
+/* ── TIMELINE ── */
+.tl-header{font-size:1.4rem;font-weight:700;letter-spacing:-0.04em;color:var(--ink);margin-bottom:4px;padding-top:4px;}
+.tl-subheader{font-size:0.72rem;color:var(--sub);margin-bottom:1rem;}
+.tl-trip-total{background:#fff;border-radius:14px;padding:12px 16px;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;}
+.tl-trip-total-label{font-size:0.72rem;color:var(--sub);}
+.tl-trip-total-val{font-size:1.1rem;font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
+.tl-trip-total-krw{font-size:0.68rem;color:var(--green);margin-top:2px;text-align:right;}
+.tl-day{margin-bottom:1.4rem;}
+.tl-date-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.tl-date-num{font-size:1.4rem;font-weight:700;letter-spacing:-0.04em;color:var(--ink);line-height:1;min-width:30px;}
+.tl-date-info{flex:1;}
+.tl-date-sub{font-size:0.68rem;color:var(--sub);}
+.tl-date-total{font-size:0.72rem;font-weight:500;color:var(--ink);}
+.tl-date-krw{font-size:0.6rem;color:var(--green);}
+.tl-card{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;box-shadow:0 1px 8px rgba(0,0,0,0.07);}
+.tl-card-img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block;}
+.tl-card-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.tl-card-name{font-size:0.95rem;font-weight:500;color:var(--ink);letter-spacing:-0.02em;font-family:'Noto Sans JP','Inter',sans-serif;}
+.tl-card-sub{font-size:0.68rem;color:var(--sub);margin-top:2px;}
+.tl-addr{display:flex;gap:4px;margin-top:8px;font-size:0.68rem;color:#777;font-family:'Noto Sans JP','Inter',sans-serif;line-height:1.4;}
+.tl-station{display:inline-flex;align-items:center;gap:5px;margin-top:6px;background:#f2f2f2;border-radius:999px;padding:4px 10px;font-size:0.62rem;color:#555;}
+.station-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.tl-menu-list{margin-top:9px;border-top:1px solid var(--border);padding-top:8px;}
+.tl-menu-item{display:flex;justify-content:space-between;align-items:flex-start;font-size:0.72rem;color:#555;font-family:'Noto Sans JP','Inter',sans-serif;padding:3px 0;}
+.tl-menu-price-col{text-align:right;}
+.tl-menu-jpy{color:var(--sub);}
+.tl-menu-krw{font-size:0.6rem;color:var(--green);margin-top:1px;}
+.tl-total{display:flex;justify-content:space-between;align-items:flex-end;margin-top:9px;padding-top:9px;border-top:1px solid var(--border);}
+.tl-total-label{font-size:0.78rem;font-weight:500;color:var(--ink);}
+.tl-total-right{text-align:right;}
+.tl-total-jpy{font-size:0.88rem;font-weight:600;color:var(--ink);}
+.tl-total-krw{font-size:0.65rem;color:var(--green);margin-top:2px;}
+.tl-actions{display:flex;gap:5px;flex-shrink:0;}
+.tl-empty{color:#ccc;text-align:center;padding:3rem 0;font-size:0.85rem;line-height:2;}
+
+/* ── DAY PANEL ── */
+.day-panel{background:#fff;margin:0;padding:16px 14px calc(var(--safe-bottom)+20px);min-height:120px;border-top:1px solid #f0f0f0;}
+.day-panel-empty{display:flex;align-items:center;justify-content:center;min-height:80px;font-size:0.78rem;color:#ccc;}
+.day-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.day-panel-date{font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:-0.02em;}
+.day-panel-dow{font-size:0.68rem;color:var(--sub);margin-top:2px;}
+.day-panel-holiday{display:inline-block;font-size:0.62rem;color:var(--red);background:#fff0ee;padding:2px 8px;border-radius:999px;margin-bottom:8px;}
+.dp-card{background:#f7f7f7;border-radius:12px;padding:10px 12px;margin-bottom:8px;}
+.dp-card-img{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px;display:block;}
+.dp-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.dp-card-name{font-size:0.88rem;font-weight:500;color:var(--ink);font-family:'Noto Sans JP','Inter',sans-serif;}
+.dp-card-sub{font-size:0.63rem;color:var(--sub);margin-top:2px;}
+.dp-card-actions{display:flex;gap:5px;flex-shrink:0;}
+.dp-addr{display:flex;gap:4px;margin-top:6px;font-size:0.63rem;color:#777;font-family:'Noto Sans JP','Inter',sans-serif;}
+.dp-station{display:inline-flex;align-items:center;gap:4px;margin-top:5px;background:#efefef;border-radius:999px;padding:3px 8px;font-size:0.58rem;color:#555;}
+.dp-station-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dp-menu-list{margin-top:7px;border-top:1px solid #ebebeb;padding-top:6px;}
+.dp-menu-item{display:flex;justify-content:space-between;align-items:flex-start;font-size:0.68rem;color:#555;font-family:'Noto Sans JP','Inter',sans-serif;padding:2px 0;}
+.dp-menu-price-col{text-align:right;}
+.dp-menu-jpy{color:var(--sub);}
+.dp-menu-krw{font-size:0.56rem;color:var(--green);margin-top:1px;}
+.dp-total{display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px;padding-top:8px;border-top:1px solid #e8e8e8;}
+.dp-total-jpy{font-size:0.88rem;font-weight:600;color:var(--ink);}
+.dp-total-krw{font-size:0.62rem;color:var(--green);margin-top:2px;text-align:right;}
+.dp-empty{font-size:0.78rem;color:#ccc;text-align:center;padding:1.2rem 0;}
+
+/* ── OVERLAY ── */
+.sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.25);z-index:100;opacity:0;pointer-events:none;transition:opacity 0.22s;}
+.sheet-overlay.active{opacity:1;pointer-events:all;}
+.sheet-add-btn{background:var(--ink);color:#fff;border:none;border-radius:999px;padding:5px 14px;font-size:0.7rem;font-weight:500;font-family:inherit;cursor:pointer;}
+.s-btn{background:#eee;border:none;border-radius:8px;padding:3px 10px;font-size:0.62rem;font-weight:500;color:#555;cursor:pointer;font-family:inherit;}
+.s-btn.del{background:#fff0ee;color:var(--red);}
+
+/* ── FORM SHEET ── */
+.form-sheet{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;z-index:102;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);max-height:92dvh;display:flex;flex-direction:column;}
+.form-sheet.active{transform:translateY(0);}
+.form-scroll{overflow-y:auto;flex:1;padding:0 14px calc(var(--safe-bottom) + 24px);}
+.form-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 10px;border-bottom:1px solid #f2f2f2;flex-shrink:0;}
+.form-head-title{font-size:0.95rem;font-weight:500;color:var(--ink);}
+.form-cancel{font-size:0.75rem;color:#aaa;background:none;border:none;cursor:pointer;font-family:inherit;}
+.form-sec{margin-top:14px;}
+.form-label{font-size:0.6rem;font-weight:500;color:#aaa;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:5px;}
+.form-input{width:100%;border:1px solid var(--border);border-radius:10px;padding:9px 11px;font-size:0.85rem;font-family:'Noto Sans JP','Inter',sans-serif;color:#333;outline:none;background:#fafafa;transition:border 0.15s;-webkit-appearance:none;}
+.form-input:focus{border-color:#ccc;background:#fff;}
+.photo-area{width:100%;height:110px;border:1.5px dashed #ddd;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;background:#fafafa;}
+.photo-hint{font-size:0.72rem;color:#bbb;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:1;pointer-events:none;}
+.photo-hint-icon{font-size:1.4rem;}
+#photoInput{display:none;}
+.form-menu-list{margin-bottom:6px;}
+.form-menu-row{display:flex;gap:6px;margin-bottom:6px;align-items:stretch;}
+.form-menu-row .form-input{flex:1;}
+.form-menu-row .form-input.price{width:82px;flex:0 0 82px;}
+.form-menu-del{background:none;border:none;color:#ccc;font-size:1.1rem;cursor:pointer;padding:0 3px;line-height:1;}
+.form-add-menu{font-size:0.7rem;color:#888;background:none;border:1px dashed #ddd;border-radius:8px;padding:5px 12px;cursor:pointer;font-family:inherit;width:100%;}
+
+/* KRW preview in form */
+.krw-preview{font-size:0.62rem;color:var(--green);margin-top:4px;min-height:16px;padding-left:2px;}
+
+/* Exchange rate bar */
+.rate-bar{background:#fff;border-radius:10px;padding:8px 12px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;}
+.rate-label{font-size:0.6rem;color:var(--sub);}
+.rate-input-wrap{display:flex;align-items:center;gap:4px;}
+.rate-input{border:1px solid var(--border);border-radius:8px;padding:4px 8px;font-size:0.78rem;font-family:'Inter',sans-serif;width:80px;outline:none;text-align:right;background:#fafafa;}
+.rate-unit{font-size:0.68rem;color:var(--sub);}
+
+.form-save{display:block;width:100%;padding:13px;background:var(--ink);color:#fff;border:none;border-radius:12px;font-size:0.88rem;font-weight:500;font-family:inherit;cursor:pointer;margin-top:14px;}
+
+/* ── SETTINGS SHEET ── */
+.settings-sheet{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;z-index:103;transform:translateY(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);max-height:80dvh;display:flex;flex-direction:column;}
+.settings-sheet.active{transform:translateY(0);}
+.settings-scroll{overflow-y:auto;flex:1;padding:0 16px calc(var(--safe-bottom)+20px);}
+.settings-title{font-size:1rem;font-weight:500;color:var(--ink);}
+.settings-sec{margin-top:16px;}
+.settings-label{font-size:0.6rem;font-weight:500;color:#aaa;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:8px;}
+.date-row{display:flex;gap:8px;}
+.date-num-row{display:flex;align-items:center;gap:6px;}
+.date-num-input{flex:1;text-align:center;min-width:0;}
+.date-num-input.sm{width:52px;flex:0 0 52px;}
+.date-num-sep{font-size:0.82rem;color:var(--sub);flex-shrink:0;}
+.date-row .form-input{flex:1;}
+.settings-save{display:block;width:100%;padding:13px;background:var(--ink);color:#fff;border:none;border-radius:12px;font-size:0.88rem;font-weight:500;font-family:inherit;cursor:pointer;margin-top:16px;}
+
+/* LINE COLORS */
+.line-ginza{background:#f7941d;}
+.line-hibiya{background:#9fc9e3;}
+.line-marunouchi{background:#e60012;}
+.line-yamanote{background:#80c241;}
+.line-nanboku{background:#00a7db;}
+.line-hanzomon{background:#8f76d6;}
+.line-oedo{background:#b5007f;}
+.line-fukutoshin{background:#7f6da4;}
+.line-default{background:#aaa;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar hidden" id="topbar">
+  <button class="topbar-menu-btn" onclick="openSidebar()">☰</button>
+  <div class="topbar-title" id="topbarTitle">캘린더</div>
+  <div class="topbar-right"></div>
+</div>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div class="sidebar-app-name">🗾 여행 캘린더</div>
+    <div class="sidebar-trip-name" id="sidebarTripName">도쿄 여행</div>
+  </div>
+  <div class="sidebar-menu">
+    <button class="sidebar-item active" id="menu-cal" onclick="showPage('cal')">
+      <span class="sidebar-item-icon">📅</span>
+      <span class="sidebar-item-label">캘린더</span>
+    </button>
+    <button class="sidebar-item" id="menu-timeline" onclick="showPage('timeline')">
+      <span class="sidebar-item-icon">🗺</span>
+      <span class="sidebar-item-label">여행 일정</span>
+    </button>
+    <div class="sidebar-divider"></div>
+    <button class="sidebar-item" onclick="openSettings();closeSidebar()">
+      <span class="sidebar-item-icon">⚙️</span>
+      <span class="sidebar-item-label">여행 설정</span>
+    </button>
+  </div>
+  <div class="sidebar-footer">
+    <div class="sidebar-footer-label">여행 캘린더 v2.0</div>
+  </div>
+</div>
+
+<!-- CALENDAR PAGE -->
+<div class="page active" id="page-cal">
+  <div class="cal-hero">
+    <button class="cal-hero-today-btn" onclick="goToday()">오늘</button>
+    <button class="cal-hero-menu-btn" onclick="openSidebar()">☰</button>
+    <div class="cal-hero-nav">
+      <button class="cal-hero-nav-btn" onclick="prevMonth()">‹</button>
+      <div>
+        <div class="cal-hero-year" id="calMonthLabel"></div>
+        <div class="cal-hero-month" id="calYearLabel"></div>
+      </div>
+      <button class="cal-hero-nav-btn" onclick="nextMonth()">›</button>
+    </div>
+  </div>
+  <div class="cal-body">
+    <div class="trip-range-bar">
+      <div>
+        <div class="trip-range-label">여행 기간</div>
+        <div class="trip-range-val" id="tripRangeDisplay">설정되지 않음</div>
+      </div>
+      <button class="trip-set-btn" onclick="openSettings()">설정 ›</button>
+    </div>
+    <div class="weekdays">
+      <div class="weekday">일</div><div class="weekday">월</div><div class="weekday">화</div>
+      <div class="weekday">수</div><div class="weekday">목</div><div class="weekday">금</div><div class="weekday">토</div>
+    </div>
+    <div class="days-grid" id="daysGrid"></div>
+  </div>
+
+  <!-- 인라인 일정 패널 -->
+  <div class="day-panel" id="dayPanel">
+    <div class="day-panel-empty" id="dayPanelEmpty">
+      <span>날짜를 탭하면 일정이 표시됩니다</span>
+    </div>
+    <div class="day-panel-content" id="dayPanelContent" style="display:none">
+      <div class="day-panel-head">
+        <div>
+          <div class="day-panel-date" id="dayPanelDate"></div>
+          <div class="day-panel-dow" id="dayPanelDow"></div>
+        </div>
+        <button class="sheet-add-btn" onclick="openFormSheet(null)">+ 추가</button>
+      </div>
+      <div id="dayPanelHoliday"></div>
+      <div id="dayPanelItems"></div>
+      <div id="dayPanelTotal"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE PAGE -->
+<div class="page" id="page-timeline">
+  <div class="tl-header" id="tlHeader">🗾 여행 일정</div>
+  <div class="tl-subheader" id="tlSubheader"></div>
+  <div id="tlTripTotal"></div>
+  <div id="timelineContent"></div>
+</div>
+
+<!-- OVERLAY (form/settings용으로만 유지) -->
+<div class="sheet-overlay" id="sheetOverlay" onclick="closeFormSheet()"></div>
+
+<!-- FORM SHEET -->
+<div class="form-sheet" id="formSheet">
+  <div class="sheet-handle"></div>
+  <div class="form-head">
+    <div class="form-head-title" id="formHeadTitle">일정 추가</div>
+    <button class="form-cancel" onclick="closeFormSheet()">취소</button>
+  </div>
+  <div class="form-scroll">
+    <div class="form-sec">
+      <label class="form-label">사진</label>
+      <div class="photo-area" id="photoArea" onclick="document.getElementById('photoInput').click()">
+        <div class="photo-hint"><span class="photo-hint-icon">📷</span>탭하여 사진 추가</div>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" onchange="handlePhoto(event)">
+    </div>
+    <div class="form-sec">
+      <label class="form-label">가게 이름</label>
+      <input class="form-input" id="inputName" placeholder="예) けやき@麻布十番">
+    </div>
+    <div class="form-sec">
+      <label class="form-label">카테고리</label>
+      <input class="form-input" id="inputSub" placeholder="예) 점심, 저녁 바, 카페">
+    </div>
+    <div class="form-sec">
+      <label class="form-label">주소</label>
+      <input class="form-input" id="inputAddr" placeholder="예) 東京都港区麻布十番1-5-1">
+    </div>
+    <div class="form-sec">
+      <label class="form-label">메뉴 / 금액</label>
+      <div class="form-menu-list" id="formMenuList"></div>
+      <button class="form-add-menu" onclick="addMenuRow()">+ 메뉴 추가</button>
+    </div>
+    <div class="rate-bar">
+      <span class="rate-label">엔화 환율</span>
+      <div class="rate-input-wrap">
+        <input class="rate-input" id="rateInput" type="number" value="930" oninput="onRateChange()">
+        <span class="rate-unit">₩ / ¥100</span>
+      </div>
+    </div>
+    <button class="form-save" onclick="saveEvent()">저장</button>
+  </div>
+</div>
+
+<!-- SETTINGS SHEET -->
+<div class="settings-sheet" id="settingsSheet">
+  <div class="sheet-handle"></div>
+  <div class="form-head">
+    <div class="settings-title">여행 설정</div>
+    <button class="form-cancel" onclick="closeSettings()">닫기</button>
+  </div>
+  <div class="settings-scroll">
+    <div class="settings-sec">
+      <label class="settings-label">여행 시작일</label>
+      <div class="date-num-row">
+        <input class="form-input date-num-input" type="number" id="startYear" placeholder="2026" maxlength="4">
+        <span class="date-num-sep">년</span>
+        <input class="form-input date-num-input sm" type="number" id="startMonth" placeholder="10" min="1" max="12">
+        <span class="date-num-sep">월</span>
+        <input class="form-input date-num-input sm" type="number" id="startDay" placeholder="07" min="1" max="31">
+        <span class="date-num-sep">일</span>
+      </div>
+    </div>
+    <div class="settings-sec">
+      <label class="settings-label">여행 종료일</label>
+      <div class="date-num-row">
+        <input class="form-input date-num-input" type="number" id="endYear" placeholder="2026" maxlength="4">
+        <span class="date-num-sep">년</span>
+        <input class="form-input date-num-input sm" type="number" id="endMonth" placeholder="10" min="1" max="12">
+        <span class="date-num-sep">월</span>
+        <input class="form-input date-num-input sm" type="number" id="endDay" placeholder="31" min="1" max="31">
+        <span class="date-num-sep">일</span>
+      </div>
+    </div>
+    <div class="settings-sec">
+      <label class="settings-label">여행 이름</label>
+      <input class="form-input" id="tripName" placeholder="예) 도쿄 여행 2026">
+    </div>
+    <div class="settings-sec">
+      <label class="settings-label">기본 환율 (₩/¥100)</label>
+      <input class="form-input" type="number" id="defaultRate" placeholder="예) 930">
+    </div>
+    <button class="settings-save" onclick="saveSettings()">저장</button>
+  </div>
+</div>
+
+<script>
+// ═══ STATE ═══
+const MONTHS_KO=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+const DOW=['일','월','화','수','목','금','토'];
+
+let state = {
+  viewYear: 2026,
+  viewMonth: 9,
+  trip: { name:'도쿄 여행', start:'2026-10-07', end:'2026-10-31' },
+  rate: 930,
+  events: {}
+};
+
+// Load from storage
+try {
+  const s = localStorage.getItem('travelcal_v2');
+  if(s) { const p=JSON.parse(s); Object.assign(state,p); }
+} catch(e){}
+
+// Seed default Tokyo events if empty
+if(!Object.keys(state.events).length) {
+  state.events = {
+    '2026-10-07':[{type:'cafe',    name:'和蘭豆@銀座',              sub:'카페',      addr:'東京都中央区銀座'}],
+    '2026-10-08':[{type:'bath',    name:'弁天湯@新宿',              sub:'저녁 목욕', addr:'東京都新宿区'}],
+    '2026-10-09':[{type:'cafe',    name:'flour+water@虎ノ門',       sub:'브런치',    addr:'東京都港区虎ノ門',   menu:[{name:'牛レアカツ 山椒赤ワインソース',price:'¥2,000'}]}],
+    '2026-10-10':[{type:'bar',     name:'blooow.@新橋',             sub:'저녁 바',   addr:'東京都港区新橋'}],
+    '2026-10-14':[{type:'hamburg', name:'挽き肉のトリコ@渋谷',      sub:'점심',      addr:'東京都渋谷区'}],
+    '2026-10-16':[{type:'bar',     name:'blooow.@新橋',             sub:'저녁 바',   addr:'東京都港区新橋'}],
+    '2026-10-20':[{type:'bath',    name:'弁天湯@新宿',              sub:'저녁 목욕', addr:'東京都新宿区'}],
+    '2026-10-21':[{type:'beef',    name:'けやき@麻布十番',           sub:'점심',      addr:'東京都港区麻布十番', menu:[{name:'特選 牛たん櫃まぶし御膳',price:'¥3,500'},{name:'生ビール 中',price:'¥770'}]}],
+    '2026-10-24':[{type:'bar',     name:'blooow.@新橋',             sub:'저녁 바',   addr:'東京都港区新橋'}],
+    '2026-10-26':[{type:'bath',    name:'弁天湯@新宿',              sub:'저녁 목욕', addr:'東京都新宿区'}],
+    '2026-10-28':[{type:'cafe',    name:'カフェ ラ・ボエム@北青山',  sub:'점심',      addr:'東京都港区北青山'}],
+  };
+}
+
+function persist(){ localStorage.setItem('travelcal_v2', JSON.stringify(state)); }
+
+// ═══ HELPERS ═══
+const STATIONS=[
+  {keys:['銀座','中央区銀座'],         name:'銀座駅',      line:'銀座線',    cls:'line-ginza',    walk:'徒歩3분'},
+  {keys:['新宿','西新宿','歌舞伎町'],  name:'新宿駅',      line:'山手線',    cls:'line-yamanote', walk:'徒歩5분'},
+  {keys:['虎ノ門'],                    name:'虎ノ門駅',    line:'銀座線',    cls:'line-ginza',    walk:'徒歩3분'},
+  {keys:['新橋'],                      name:'新橋駅',      line:'山手線',    cls:'line-yamanote', walk:'徒歩2분'},
+  {keys:['渋谷'],                      name:'渋谷駅',      line:'山手線',    cls:'line-yamanote', walk:'徒歩5분'},
+  {keys:['麻布十番'],                  name:'麻布十番駅',  line:'南北線',    cls:'line-nanboku',  walk:'徒歩3분'},
+  {keys:['北青山','南青山'],           name:'表参道駅',    line:'銀座線',    cls:'line-ginza',    walk:'徒歩5분'},
+  {keys:['表参道'],                    name:'表参道駅',    line:'銀座線',    cls:'line-ginza',    walk:'徒歩1분'},
+  {keys:['六本木'],                    name:'六本木駅',    line:'日比谷線',  cls:'line-hibiya',   walk:'徒歩3분'},
+  {keys:['恵比寿'],                    name:'恵比寿駅',    line:'山手線',    cls:'line-yamanote', walk:'徒歩3분'},
+  {keys:['浅草'],                      name:'浅草駅',      line:'銀座線',    cls:'line-ginza',    walk:'徒歩3분'},
+  {keys:['上野'],                      name:'上野駅',      line:'山手線',    cls:'line-yamanote', walk:'徒歩5분'},
+  {keys:['池袋'],                      name:'池袋駅',      line:'山手線',    cls:'line-yamanote', walk:'徒歩5분'},
+  {keys:['品川'],                      name:'品川駅',      line:'山手線',    cls:'line-yamanote', walk:'徒歩5분'},
+  {keys:['原宿'],                      name:'原宿駅',      line:'山手線',    cls:'line-yamanote', walk:'徒歩3분'},
+  {keys:['代官山'],                    name:'代官山駅',    line:'東急東横線',cls:'line-default',  walk:'徒歩3분'},
+  {keys:['中目黒'],                    name:'中目黒駅',    line:'東急東横線',cls:'line-default',  walk:'徒歩3분'},
+  {keys:['秋葉原'],                    name:'秋葉原駅',    line:'山手線',    cls:'line-yamanote', walk:'徒歩3분'},
+  {keys:['新大久保'],                  name:'新大久保駅',  line:'山手線',    cls:'line-yamanote', walk:'徒歩3분'},
+  {keys:['吉祥寺'],                    name:'吉祥寺駅',    line:'中央線',    cls:'line-default',  walk:'徒歩5분'},
+];
+
+function getStation(addr,name){
+  const str=(addr||'')+(name||'');
+  for(const s of STATIONS) if(s.keys.some(k=>str.includes(k))) return s;
+  return null;
+}
+
+function dateKey(y,m,d){ return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+
+function parseJpy(str){
+  if(!str) return NaN;
+  const n=str.replace(/,/g,'').match(/\d+/g);
+  return n?Math.max(...n.map(Number)):NaN;
+}
+function jpyToKrw(jpy){ return Math.round(jpy*state.rate/100); }
+function fmtKrw(w){ return '₩'+w.toLocaleString(); }
+function fmtJpy(y){ return '¥'+y.toLocaleString(); }
+
+function calcEvTotal(ev){
+  return (ev.menu||[]).reduce((s,m)=>{const n=parseJpy(m.price);return s+(isNaN(n)?0:n);},0);
+}
+function calcDayTotal(evList){
+  return (evList||[]).reduce((s,ev)=>s+calcEvTotal(ev),0);
+}
+
+function isInTrip(y,m,d){
+  if(!state.trip.start||!state.trip.end) return false;
+  const k=dateKey(y,m,d);
+  return k>=state.trip.start&&k<=state.trip.end;
+}
+function isTripStart(y,m,d){ return dateKey(y,m,d)===state.trip.start; }
+function isTripEnd(y,m,d){ return dateKey(y,m,d)===state.trip.end; }
+
+// 일본 공휴일 (2024~2027, 振替休日 포함)
+function getHoliday(y,m,d){
+  const h={
+    // 2024
+    '2024-01-01':'元日','2024-01-08':'成人の日','2024-02-11':'建国記念日','2024-02-12':'振替休日',
+    '2024-02-23':'天皇誕生日','2024-03-20':'春分の日','2024-04-29':'昭和の日',
+    '2024-05-03':'憲法記念日','2024-05-04':'みどりの日','2024-05-05':'こどもの日','2024-05-06':'振替休日',
+    '2024-07-15':'海の日','2024-08-11':'山の日','2024-08-12':'振替休日',
+    '2024-09-16':'敬老の日','2024-09-22':'秋分の日','2024-09-23':'振替休日',
+    '2024-10-14':'スポーツの日','2024-11-03':'文化の日','2024-11-04':'振替休日',
+    '2024-11-23':'勤労感謝の日',
+    // 2025
+    '2025-01-01':'元日','2025-01-13':'成人の日','2025-02-11':'建国記念日',
+    '2025-02-23':'天皇誕生日','2025-02-24':'振替休日','2025-03-20':'春分の日',
+    '2025-04-29':'昭和の日','2025-05-03':'憲法記念日','2025-05-04':'みどりの日',
+    '2025-05-05':'こどもの日','2025-05-06':'振替休日',
+    '2025-07-21':'海の日','2025-08-11':'山の日',
+    '2025-09-15':'敬老の日','2025-09-23':'秋分の日',
+    '2025-10-13':'スポーツの日','2025-11-03':'文化の日','2025-11-23':'勤労感謝の日','2025-11-24':'振替休日',
+    // 2026
+    '2026-01-01':'元日','2026-01-12':'成人の日',
+    '2026-02-11':'建国記念日','2026-02-23':'天皇誕生日',
+    '2026-03-20':'春分の日','2026-04-29':'昭和の日',
+    '2026-05-03':'憲法記念日','2026-05-04':'みどりの日','2026-05-05':'こどもの日',
+    '2026-07-20':'海の日','2026-08-11':'山の日',
+    '2026-09-21':'敬老の日','2026-09-22':'国民の休日','2026-09-23':'秋分の日',
+    '2026-10-12':'スポーツの日',
+    '2026-11-03':'文化の日','2026-11-23':'勤労感謝の日',
+    // 2027
+    '2027-01-01':'元日','2027-01-11':'成人の日',
+    '2027-02-11':'建国記念日','2027-02-23':'天皇誕生日',
+    '2027-03-21':'春分の日','2027-03-22':'振替休日','2027-04-29':'昭和の日',
+    '2027-05-03':'憲法記念日','2027-05-04':'みどりの日','2027-05-05':'こどもの日',
+    '2027-07-19':'海の日','2027-08-11':'山の日',
+    '2027-09-20':'敬老の日','2027-09-23':'秋分の日',
+    '2027-10-11':'スポーツの日',
+    '2027-11-03':'文化の日','2027-11-23':'勤労感謝の日',
+  };
+  return h[dateKey(y,m,d)]||null;
+}
+
+// ═══ CALENDAR BUILD ═══
+function buildCal(){
+  const y=state.viewYear, m=state.viewMonth;
+  const MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calMonthLabel').textContent=MONTH_NAMES[m];
+  document.getElementById('calYearLabel').textContent=y;
+
+  // Apply monthly color
+  const hero=document.querySelector('.cal-hero');
+  hero.className='cal-hero m'+(m+1);
+
+  // trip range display
+  const tr=state.trip;
+  if(tr.start&&tr.end){
+    const s=new Date(tr.start), e=new Date(tr.end);
+    const fmt=d=>`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+    document.getElementById('tripRangeDisplay').textContent=`${fmt(s)} ~ ${fmt(e)}`;
+  } else {
+    document.getElementById('tripRangeDisplay').textContent='설정되지 않음';
+  }
+
+  const grid=document.getElementById('daysGrid');
+  grid.innerHTML='';
+  const firstDay=new Date(y,m,1).getDay();
+  const daysInMonth=new Date(y,m+1,0).getDate();
+  const today=new Date();
+  const todayKey=dateKey(today.getFullYear(),today.getMonth(),today.getDate());
+
+  for(let i=0;i<firstDay;i++){ const e=document.createElement('div'); e.className='day-cell empty'; grid.appendChild(e); }
+
+  for(let d=1;d<=daysInMonth;d++){
+    const dow=(firstDay+d-1)%7;
+    const key=dateKey(y,m,d);
+    const cell=document.createElement('div');
+    let cls='day-cell';
+    if(dow===0) cls+=' sunday';
+    if(dow===6) cls+=' saturday';
+    const hol=getHoliday(y,m,d);
+    if(hol) cls+=' holiday';
+    if(key===todayKey) cls+=' today';
+    if(isTripStart(y,m,d)) cls+=' trip-start';
+    else if(isTripEnd(y,m,d)) cls+=' trip-end';
+    else if(isInTrip(y,m,d)) cls+=' in-trip';
+    cell.className=cls;
+    cell.onclick=()=>openSheet(y,m,d,dow);
+
+    const nr=document.createElement('div'); nr.className='day-num-row';
+    const nm=document.createElement('span'); nm.className='day-num'; nm.textContent=d; nr.appendChild(nm);
+    const evList=state.events[key]||[];
+    const tot=calcDayTotal(evList);
+    if(tot>0){ const te=document.createElement('span'); te.className='day-total'; te.textContent=fmtJpy(tot); nr.appendChild(te); }
+    cell.appendChild(nr);
+
+    if(hol){ const hl=document.createElement('span'); hl.className='holiday-label'; hl.textContent=hol; cell.appendChild(hl); }
+    evList.forEach(ev=>{ const ch=document.createElement('span'); ch.className='event-chip'; ch.textContent=ev.name; cell.appendChild(ch); });
+    grid.appendChild(cell);
+  }
+  const rem=(firstDay+daysInMonth)%7;
+  if(rem>0) for(let i=rem;i<7;i++){ const e=document.createElement('div'); e.className='day-cell empty'; grid.appendChild(e); }
+}
+
+function prevMonth(){ state.viewMonth--; if(state.viewMonth<0){state.viewMonth=11;state.viewYear--;} buildCal(); }
+function nextMonth(){ state.viewMonth++; if(state.viewMonth>11){state.viewMonth=0;state.viewYear++;} buildCal(); }
+function goToday(){ const t=new Date(); state.viewYear=t.getFullYear(); state.viewMonth=t.getMonth(); buildCal(); }
+
+// ═══ TIMELINE ═══
+function buildTimeline(){
+  const tr=state.trip;
+  document.getElementById('tlHeader').textContent='🗾 '+(state.trip.name||'여행 일정');
+  if(tr.start&&tr.end){
+    const s=new Date(tr.start), e=new Date(tr.end);
+    const days=Math.round((e-s)/(1000*60*60*24))+1;
+    document.getElementById('tlSubheader').textContent=`${tr.start} ~ ${tr.end} · ${days}일`;
+  } else { document.getElementById('tlSubheader').textContent=''; }
+
+  // collect all event keys
+  const allKeys=Object.keys(state.events).sort();
+  const c=document.getElementById('timelineContent');
+
+  if(!allKeys.length){ c.innerHTML='<div class="tl-empty">일정을 추가하면 여기에 표시됩니다</div>'; document.getElementById('tlTripTotal').innerHTML=''; return; }
+
+  // trip total
+  let grandTotal=0;
+  allKeys.forEach(k=>{ grandTotal+=calcDayTotal(state.events[k]||[]); });
+  const grandKrw=jpyToKrw(grandTotal);
+  document.getElementById('tlTripTotal').innerHTML=grandTotal>0?`
+    <div class="tl-trip-total">
+      <div><div class="tl-trip-total-label">여행 총 예상 비용</div></div>
+      <div style="text-align:right">
+        <div class="tl-trip-total-val">${fmtJpy(grandTotal)}</div>
+        <div class="tl-trip-total-krw">${fmtKrw(grandKrw)}</div>
+      </div>
+    </div>`:'';
+
+  c.innerHTML=allKeys.map(key=>{
+    const [ky,km,kd]=key.split('-').map(Number);
+    const dow=new Date(key).getDay();
+    const evList=state.events[key]||[];
+    const dayTot=calcDayTotal(evList);
+    const dc=dow===0?'color:var(--red)':dow===6?'color:var(--blue)':'';
+    const hol=getHoliday(ky,km-1,kd);
+
+    const cards=evList.map((ev,idx)=>{
+      const st=getStation(ev.addr,ev.name);
+      const stHtml=st?`<div class="tl-station"><span class="station-dot ${st.cls}"></span>${st.name} · ${st.line} · ${st.walk}</div>`:'';
+      const addrHtml=ev.addr?`<div class="tl-addr"><span>📍</span><span>${ev.addr}</span></div>`:'';
+      const imgHtml=ev.photo?`<img class="tl-card-img" src="${ev.photo}" alt="">`:'';
+      const evTot=calcEvTotal(ev);
+      const menuHtml=(ev.menu&&ev.menu.length)?`<div class="tl-menu-list">${ev.menu.map(m=>{
+        const jp=parseJpy(m.price); const kr=!isNaN(jp)?jpyToKrw(jp):null;
+        return `<div class="tl-menu-item"><span>${m.name}</span><div class="tl-menu-price-col"><div class="tl-menu-jpy">${m.price}</div>${kr?`<div class="tl-menu-krw">${fmtKrw(kr)}</div>`:''}</div></div>`;
+      }).join('')}</div>`:'';
+      const totHtml=evTot>0?`<div class="tl-total"><span class="tl-total-label">합계</span><div class="tl-total-right"><div class="tl-total-jpy">${fmtJpy(evTot)}</div><div class="tl-total-krw">${fmtKrw(jpyToKrw(evTot))}</div></div></div>`:'';
+      return `<div class="tl-card">
+        ${imgHtml}
+        <div class="tl-card-row">
+          <div><div class="tl-card-name">${ev.name}</div><div class="tl-card-sub">${ev.sub||''}</div></div>
+          <div class="tl-actions">
+            <button class="s-btn" onclick="tlEdit('${key}',${idx})">수정</button>
+            <button class="s-btn del" onclick="tlDel('${key}',${idx})">삭제</button>
+          </div>
+        </div>
+        ${addrHtml}${stHtml}${menuHtml}${totHtml}
+      </div>`;
+    }).join('');
+
+    return `<div class="tl-day">
+      <div class="tl-date-row">
+        <div class="tl-date-num" style="${dc}">${kd}</div>
+        <div class="tl-date-info">
+          <div class="tl-date-sub">${ky}년 ${km}월 ${kd}일 ${DOW[dow]}요일${hol?' · 🎌'+hol:''}</div>
+          ${dayTot>0?`<div class="tl-date-total">${fmtJpy(dayTot)} <span class="tl-date-krw">· ${fmtKrw(jpyToKrw(dayTot))}</span></div>`:''}
+        </div>
+      </div>${cards}
+    </div>`;
+  }).join('');
+}
+
+// ═══ SIDEBAR ═══
+function openSidebar(){
+  document.getElementById('sidebarOverlay').classList.add('active');
+  document.getElementById('sidebar').classList.add('active');
+  // update trip name
+  document.getElementById('sidebarTripName').textContent=state.trip.name||'여행 캘린더';
+}
+function closeSidebar(){
+  document.getElementById('sidebarOverlay').classList.remove('active');
+  document.getElementById('sidebar').classList.remove('active');
+}
+
+// ═══ TABS ═══
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('menu-'+id).classList.add('active');
+  const titles={cal:'캘린더',timeline:'여행 일정'};
+  document.getElementById('topbarTitle').textContent=titles[id]||'';
+  // topbar: hide on calendar (has its own hero), show on others
+  document.getElementById('topbar').classList.toggle('hidden', id==='cal');
+  if(id==='timeline') buildTimeline();
+  closeSidebar();
+}
+
+// ═══ DAY PANEL ═══
+let curKey=null, curDow=null;
+
+function openSheet(y,m,d,dow){
+  curKey=dateKey(y,m,d); curDow=dow;
+  renderDayPanel();
+}
+
+function renderDayPanel(){
+  const key=curKey, dow=curDow;
+  const [ky,km,kd]=key.split('-').map(Number);
+  const dc=dow===0?'color:var(--red)':dow===6?'color:var(--blue)':'';
+  const hol=getHoliday(ky,km-1,kd);
+  const evList=state.events[key]||[];
+  const dayTot=calcDayTotal(evList);
+
+  document.getElementById('dayPanelEmpty').style.display='none';
+  document.getElementById('dayPanelContent').style.display='block';
+  document.getElementById('dayPanelDate').textContent=`${ky}년 ${km}월 ${kd}일`;
+  document.getElementById('dayPanelDow').innerHTML=`<span style="${dc}">${DOW[dow]}요일</span>`;
+  document.getElementById('dayPanelHoliday').innerHTML=hol?`<span class="day-panel-holiday">🎌 ${hol}</span>`:'';
+
+  if(evList.length){
+    document.getElementById('dayPanelItems').innerHTML=evList.map((ev,idx)=>{
+      const st=getStation(ev.addr,ev.name);
+      const stHtml=st?`<div class="dp-station"><span class="dp-station-dot ${st.cls}"></span>${st.name} · ${st.line} · ${st.walk}</div>`:'';
+      const addrHtml=ev.addr?`<div class="dp-addr"><span>📍</span><span>${ev.addr}</span></div>`:'';
+      const imgHtml=ev.photo?`<img class="dp-card-img" src="${ev.photo}" alt="">`:'';
+      const evTot=calcEvTotal(ev);
+      const menuHtml=(ev.menu&&ev.menu.length)?`<div class="dp-menu-list">${ev.menu.map(m=>{
+        const jp=parseJpy(m.price); const kr=!isNaN(jp)?jpyToKrw(jp):null;
+        return `<div class="dp-menu-item"><span>${m.name}</span><div class="dp-menu-price-col"><div class="dp-menu-jpy">${m.price}</div>${kr?`<div class="dp-menu-krw">${fmtKrw(kr)}</div>`:''}</div></div>`;
+      }).join('')}</div>`:'';
+      const totHtml=evTot>0?`<div class="dp-total"><span style="font-size:0.75rem;font-weight:500;color:var(--ink)">합계</span><div style="text-align:right"><div class="dp-total-jpy">${fmtJpy(evTot)}</div><div class="dp-total-krw">${fmtKrw(jpyToKrw(evTot))}</div></div></div>`:'';
+      return `<div class="dp-card">
+        ${imgHtml}
+        <div class="dp-card-top">
+          <div><div class="dp-card-name">${ev.name}</div><div class="dp-card-sub">${ev.sub||''}</div></div>
+          <div class="dp-card-actions">
+            <button class="s-btn" onclick="openFormSheet(${idx})">수정</button>
+            <button class="s-btn del" onclick="delEv(${idx})">삭제</button>
+          </div>
+        </div>
+        ${addrHtml}${stHtml}${menuHtml}${totHtml}
+      </div>`;
+    }).join('');
+    document.getElementById('dayPanelTotal').innerHTML=dayTot>0?`
+      <div style="background:#f7f7f7;border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+        <span style="font-size:0.75rem;color:var(--sub)">일 총계</span>
+        <div style="text-align:right">
+          <div style="font-size:0.95rem;font-weight:700;color:var(--ink)">${fmtJpy(dayTot)}</div>
+          <div style="font-size:0.62rem;color:var(--green);margin-top:2px">${fmtKrw(jpyToKrw(dayTot))}</div>
+        </div>
+      </div>`:'';
+  } else {
+    document.getElementById('dayPanelItems').innerHTML=`<div class="dp-empty">일정 없음</div>`;
+    document.getElementById('dayPanelTotal').innerHTML='';
+  }
+}
+
+function closeSheet(){} // 더 이상 필요 없음
+
+// ═══ FORM ═══
+let editIdx=null, tempPhoto=null;
+
+function openFormSheet(idx){
+  editIdx=idx; tempPhoto=null;
+  document.getElementById('formHeadTitle').textContent=idx!==null?'일정 수정':'일정 추가';
+  document.getElementById('formMenuList').innerHTML='';
+  document.getElementById('rateInput').value=state.rate;
+  const area=document.getElementById('photoArea');
+  area.innerHTML='<div class="photo-hint"><span class="photo-hint-icon">📷</span>탭하여 사진 추가</div>';
+  if(idx!==null && state.events[curKey]?.[idx]){
+    const ev=state.events[curKey][idx];
+    document.getElementById('inputName').value=ev.name||'';
+    document.getElementById('inputSub').value=ev.sub||'';
+    document.getElementById('inputAddr').value=ev.addr||'';
+    if(ev.photo){tempPhoto=ev.photo;area.innerHTML=`<img src="${ev.photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px"><div style="position:absolute;bottom:6px;right:8px;background:rgba(0,0,0,0.45);color:#fff;font-size:0.58rem;padding:2px 8px;border-radius:999px">변경</div>`;}
+    (ev.menu||[]).forEach(m=>addMenuRow(m.name,m.price));
+  } else {
+    document.getElementById('inputName').value='';
+    document.getElementById('inputSub').value='';
+    document.getElementById('inputAddr').value='';
+  }
+  document.getElementById('formSheet').classList.add('active');
+}
+
+function closeFormSheet(){ document.getElementById('formSheet').classList.remove('active'); editIdx=null; tempPhoto=null; }
+
+function handlePhoto(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    tempPhoto=ev.target.result;
+    const area=document.getElementById('photoArea');
+    area.innerHTML=`<img src="${tempPhoto}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px"><div style="position:absolute;bottom:6px;right:8px;background:rgba(0,0,0,0.45);color:#fff;font-size:0.58rem;padding:2px 8px;border-radius:999px">변경</div>`;
+  };
+  r.readAsDataURL(f); e.target.value='';
+}
+
+function onRateChange(){
+  const rate=Number(document.getElementById('rateInput').value)||state.rate;
+  // update all krw previews
+  document.querySelectorAll('.form-menu-row').forEach(row=>{
+    const inp=row.querySelector('.price');
+    const prev=row.querySelector('.krw-preview');
+    if(!inp||!prev) return;
+    const jp=parseJpy(inp.value);
+    prev.textContent=!isNaN(jp)?`${fmtKrw(Math.round(jp*rate/100))}`:'';
+  });
+}
+
+function addMenuRow(name='',price=''){
+  const list=document.getElementById('formMenuList');
+  const row=document.createElement('div');
+  row.className='form-menu-row';
+  row.style.flexWrap='wrap';
+  const rate=Number(document.getElementById('rateInput').value)||state.rate;
+  const jp=parseJpy(price);
+  const krwText=(!isNaN(jp)&&jp>0)?fmtKrw(Math.round(jp*rate/100)):'';
+  row.innerHTML=`
+    <input class="form-input" placeholder="메뉴명" value="${name}" style="margin-bottom:4px">
+    <input class="form-input price" placeholder="¥0" value="${price}" style="margin-bottom:4px" oninput="updateKrwPreview(this)">
+    <button class="form-menu-del" onclick="this.parentElement.remove()">×</button>
+    <div class="krw-preview" style="width:100%;padding-left:2px">${krwText}</div>`;
+  list.appendChild(row);
+}
+
+function updateKrwPreview(input){
+  const row=input.closest('.form-menu-row');
+  const prev=row.querySelector('.krw-preview');
+  if(!prev) return;
+  const rate=Number(document.getElementById('rateInput').value)||state.rate;
+  const jp=parseJpy(input.value);
+  prev.textContent=!isNaN(jp)&&jp>0?fmtKrw(Math.round(jp*rate/100)):'';
+}
+
+function saveEvent(){
+  const name=document.getElementById('inputName').value.trim();
+  const sub=document.getElementById('inputSub').value.trim();
+  const addr=document.getElementById('inputAddr').value.trim();
+  const rate=Number(document.getElementById('rateInput').value);
+  if(!name){document.getElementById('inputName').focus();return;}
+  if(rate>0) state.rate=rate;
+  const menu=[];
+  document.querySelectorAll('#formMenuList .form-menu-row').forEach(row=>{
+    const ins=row.querySelectorAll('input');
+    const n=ins[0].value.trim(), p=ins[1].value.trim();
+    if(n) menu.push({name:n,price:p});
+  });
+  const ev={type:'custom',name,sub,addr,...(menu.length?{menu}:{}),...(tempPhoto?{photo:tempPhoto}:{})};
+  if(!state.events[curKey]) state.events[curKey]=[];
+  if(editIdx!==null) state.events[curKey][editIdx]=ev;
+  else state.events[curKey].push(ev);
+  persist(); buildCal(); if(curKey) renderDayPanel(); closeFormSheet();
+}
+
+function delEv(idx){
+  state.events[curKey].splice(idx,1);
+  if(!state.events[curKey].length) delete state.events[curKey];
+  persist(); buildCal(); if(curKey) renderDayPanel();
+}
+
+function tlEdit(key,idx){
+  curKey=key; curDow=new Date(key).getDay();
+  document.getElementById('sheetOverlay').classList.add('active');
+  openFormSheet(idx);
+}
+function tlDel(key,idx){
+  state.events[key].splice(idx,1);
+  if(!state.events[key].length) delete state.events[key];
+  persist(); buildCal(); buildTimeline();
+}
+
+// ═══ SETTINGS ═══
+function openSettings(){
+  const s=state.trip.start?state.trip.start.split('-'):['2026','10','07'];
+  const e=state.trip.end?state.trip.end.split('-'):['2026','10','31'];
+  document.getElementById('startYear').value=s[0];
+  document.getElementById('startMonth').value=Number(s[1]);
+  document.getElementById('startDay').value=Number(s[2]);
+  document.getElementById('endYear').value=e[0];
+  document.getElementById('endMonth').value=Number(e[1]);
+  document.getElementById('endDay').value=Number(e[2]);
+  document.getElementById('tripName').value=state.trip.name||'';
+  document.getElementById('defaultRate').value=state.rate||930;
+  document.getElementById('sheetOverlay').classList.add('active');
+  document.getElementById('settingsSheet').classList.add('active');
+}
+function closeSettings(){
+  document.getElementById('settingsSheet').classList.remove('active');
+  document.getElementById('sheetOverlay').classList.remove('active');
+}
+function saveSettings(){
+  const sy=document.getElementById('startYear').value;
+  const sm=document.getElementById('startMonth').value;
+  const sd=document.getElementById('startDay').value;
+  const ey=document.getElementById('endYear').value;
+  const em=document.getElementById('endMonth').value;
+  const ed=document.getElementById('endDay').value;
+  const name=document.getElementById('tripName').value.trim();
+  const rate=Number(document.getElementById('defaultRate').value);
+
+  if(sy&&sm&&sd){
+    state.trip.start=`${sy}-${String(sm).padStart(2,'0')}-${String(sd).padStart(2,'0')}`;
+  }
+  if(ey&&em&&ed){
+    state.trip.end=`${ey}-${String(em).padStart(2,'0')}-${String(ed).padStart(2,'0')}`;
+  }
+  if(name) state.trip.name=name;
+  if(rate>0) state.rate=rate;
+  if(sy) { state.viewYear=Number(sy); state.viewMonth=Number(sm)-1; }
+  persist(); buildCal();
+  document.getElementById('sidebarTripName').textContent=state.trip.name||'여행 캘린더';
+  closeSettings();
+}
+
+// ═══ INIT ═══
+buildCal();
+</script>
+<script>
+// Service Worker 등록 (오프라인 지원)
+if('serviceWorker' in navigator){
+  const swCode=`
+    const CACHE='travelcal-v1';
+    const ASSETS=['/'];
+    self.addEventListener('install',e=>{
+      e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));
+      self.skipWaiting();
+    });
+    self.addEventListener('activate',e=>{
+      e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
+      self.clients.claim();
+    });
+    self.addEventListener('fetch',e=>{
+      e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>caches.match('/'))));
+    });
+  `;
+  const blob=new Blob([swCode],{type:'application/javascript'});
+  const swUrl=URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
+
+// iOS 홈 화면 추가 안내 (처음 실행 시)
+window.addEventListener('load',()=>{
+  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isStandalone=window.navigator.standalone;
+  const shown=localStorage.getItem('pwa_hint_shown');
+  if(isIOS && !isStandalone && !shown){
+    setTimeout(()=>{
+      const banner=document.createElement('div');
+      banner.style.cssText='position:fixed;bottom:calc(env(safe-area-inset-bottom)+70px);left:12px;right:12px;background:#111;color:#fff;border-radius:16px;padding:14px 16px;z-index:999;font-size:0.8rem;line-height:1.5;box-shadow:0 4px 24px rgba(0,0,0,0.3);';
+      banner.innerHTML=`
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div>
+            <div style="font-weight:600;margin-bottom:4px">📲 홈 화면에 추가하기</div>
+            <div style="color:#aaa;font-size:0.72rem">Safari 하단 <b style="color:#fff">공유 버튼 →</b> <b style="color:#fff">홈 화면에 추가</b>를 탭하면 앱처럼 사용할 수 있어요</div>
+          </div>
+          <button onclick="this.parentElement.parentElement.remove();localStorage.setItem('pwa_hint_shown','1')" style="background:none;border:none;color:#aaa;font-size:1.2rem;cursor:pointer;flex-shrink:0;padding:0;line-height:1">×</button>
+        </div>`;
+      document.body.appendChild(banner);
+      localStorage.setItem('pwa_hint_shown','1');
+    }, 1500);
+  }
+});
+</script>
+</body>
+</html>
